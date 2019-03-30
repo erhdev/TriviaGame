@@ -1,13 +1,5 @@
-// I will need a bank of questions and a bank of potential answers 
-// that are linked to the questions
+// Sorry I didn't finish the assignment, I'm just exhausted today. Everything worked until I added in more questions, and for the life of me I cannot figure out what went wrong. 
 
-// I will need a way of dynamically populating the response buttons with 
-// the answers appropriate to the questions
-
-// I will need a way of resetting the timer when the question is answered
-
-// I could use an array of objects to set up the questions and answers
-// theme: D&D trivia
 var qArray = [
     qFireball = {
         question: "What is the most iconic third level spell in Dungeons and Dragons?",
@@ -65,9 +57,9 @@ var qsRight = 0;
 var buttonArray = [
     $('#a1'), $('#a2'), $('#a3'), $('#a4')
 ];
-var qInPlay;
+
 function runGame() {
-   
+    console.log(qArray);
     qInPlay = qArray[Math.floor(Math.random() * qArray.length)];
     console.log(qInPlay);
     $('#question').text(qInPlay.question);
@@ -81,38 +73,42 @@ function runGame() {
     }
     
     //if the text of the clicked button equals the text of the rightAnswer property the user gets the question correct
-    $('button').click( function () {
-        if ($(event.target).text() === qInPlay.rightAnswer) {
-           $('#success').fadeIn(700)
-           .fadeOut(800);
-           qsRight++;
-           reset();
-        } else {
-            $('#failure').fadeIn(700)
-            .fadeOut(800);
-            reset();
-        }
-    });
-    if ((qArray.length === 0) && (qsRight >= 9)) {
-        playerVictory();        
+   
+}
+$('button').click( function () {
+    if ($(event.target).text() === qInPlay.rightAnswer) {
+       $('#success').fadeIn(700)
+       .fadeOut(800);
+       qsRight++;
+       reset();
+    } else {
+        $('#failure').fadeIn(700)
+        .fadeOut(800);
+        reset();
     }
+});
+if ((qArray.length === 0) && (qsRight >= 9)) {
+    playerVictory();        
 }
 var time = 13;
 $('#timer').text(time);
 
-var timer = setInterval(countdown(), 1000);
+setInterval(function() {
+    time--;
+    $('#timer').text(time);
+    if (time === 0) {
+        $('#slow')
+        .fadeIn(500)
+        .fadeOut(550);
+        reset();
+    }}, 1000);
 
 function countdown(){
-        time--;
-        $('#timer').text(time);
-        if (time === 0) {
-            $('#slow')
-            .fadeIn(500)
-            .fadeOut(550);
-            reset();
-        };
+        
 }
 function reset() {
+    console.log(qInPlay);
+    clearInterval();
     qArray.splice(qInPlay, 1);
     time = 13;
     runGame();

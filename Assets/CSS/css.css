@@ -1,0 +1,11 @@
+body {
+    text-align: center;
+    align-content: center;
+    background-image: url(https://i.pinimg.com/originals/16/34/e7/1634e73f6ac2b9ea05e74df94e981e04.jpg);
+    background-size: 100%;
+}
+
+#container {
+    background-color: whitesmoke;
+    margin-top: 15%;
+}
